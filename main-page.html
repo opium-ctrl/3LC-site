@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3LC</title>
+    <style>
+         :root {
+            --bg: #0b0b0c;
+            --pill: #151516;
+            --orange: #e8862b;
+            --grey: #9a9a9a;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: var(--bg);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: -20%;
+            left: 50%;
+            width: 900px;
+            height: 900px;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, rgba(232, 134, 43, 0.10) 0%, rgba(232, 134, 43, 0) 70%);
+            pointer-events: none;
+            z-index: 0;
+            animation: drift 14s ease-in-out infinite;
+        }
+        
+        @keyframes drift {
+            0%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-48%) translateY(30px);
+            }
+        }
+        
+        header.navbar {
+            position: relative;
+            z-index: 2;
+            height: 48px;
+            margin: 11px 13px 11px 8px;
+            border-radius: 999px;
+            background: var(--pill);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 26px 0 14px;
+            opacity: 0;
+            transform: translateY(-16px);
+            animation: navIn 0.7s ease-out forwards;
+            box-shadow: 0 0 0 rgba(232, 134, 43, 0);
+            transition: box-shadow 0.4s ease;
+        }
+        
+        header.navbar:hover {
+            box-shadow: 0 0 24px rgba(232, 134, 43, 0.12);
+        }
+        
+        @keyframes navIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .brand img {
+            border-radius: 6px;
+            transition: transform 0.4s ease;
+        }
+        
+        .brand:hover img {
+            transform: rotate(8deg) scale(1.08);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 34px;
+        }
+        
+        .nav-links a {
+            position: relative;
+            text-decoration: none;
+            text-align: center;
+            line-height: 1.25;
+            opacity: 0;
+            transform: translateY(-10px);
+            animation: navIn 0.6s ease-out forwards;
+        }
+        
+        .nav-links a:nth-child(1) {
+            animation-delay: 0.15s;
+        }
+        
+        .nav-links a:nth-child(2) {
+            animation-delay: 0.28s;
+        }
+        
+        .nav-links a:nth-child(3) {
+            animation-delay: 0.41s;
+        }
+        
+        .nav-links a.active {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 13px;
+        }
+        
+        .nav-links a:not(.active) {
+            color: #d2d2d2;
+            font-size: 11px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:not(.active)::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -6px;
+            width: 0%;
+            height: 1px;
+            background: var(--orange);
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        
+        .nav-links a:not(.active):hover {
+            color: var(--white);
+        }
+        
+        .nav-links a:not(.active):hover::after {
+            width: 100%;
+            left: 0%;
+        }
+        
+        main {
+            position: relative;
+            z-index: 1;
+            padding: 0 24px;
+        }
+        
+        .tag {
+            display: block;
+            text-align: center;
+            color: var(--orange);
+            font-weight: bold;
+            margin-top: 60px;
+            opacity: 0;
+            letter-spacing: 1px;
+            animation: fadeUp 0.8s ease-out 0.5s forwards;
+        }
+        
+        h1.title {
+            text-align: center;
+            color: var(--white);
+            font-weight: bold;
+            font-size: 40px;
+            margin: 22px auto 10px;
+            max-width: 760px;
+            line-height: 1.25;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.7s forwards;
+        }
+        
+        .subtitle {
+            display: block;
+            text-align: center;
+            color: var(--grey);
+            margin-top: 8px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.95s forwards;
+        }
+        
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="brand">
+            <img src="logo-avecfond.jpg" alt="logo" width="30" height="30">
+            <a>3LC</a>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="active">ACCEUIL</a>
+            <a href="https://linux-cognac.org/achat-ordinateur">ACHAT<br>D'ORDINATEUR</a>
+            <a href="https://linux-cognac.org/integrer-l-association">INTEGRER<br>L'ASSOCIATION</a>
+        </nav>
+    </header>
+
+    <main>
+        <a class="tag">// ASSOCIATION 3LC</a>
+        <h1 class="title">Du matériel reconditionné,<br> des logiciels libres.</h1>
+        <a class="subtitle">rejoignez-nous !</a>
+    </main>
+
+</body>
+
+</html>
